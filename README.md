@@ -2,71 +2,75 @@
 
 ## usersテーブル
 
-|  Column  |  Type  | options     |
-| -------- | ------ | ----------- | 
-| Nickname | string | null: false |
-| Email    | string | null: false |
-| Password | string | null: false |
-| NAME     | string | null: false |
-| Birthday | string | null: false |
+|       Column       |  Type  | options                   |
+| ------------------ | ------ | ------------------------- | 
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| first_name(カナ)    | string | null: false               |
+| last_name(カナ)     | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 
-_ has_many :Buys
-_ has_many :Items
-_ has_many :Comments
+_ has_many :buys
+_ has_many :items
+_ has_many :comments
 
 
-## Itemsテーブル
+## itemsテーブル
 
 |        Column       |    Type    | options                       |
 | ------------------- | ---------- | ----------------------------- |
-| Product-image       |            | implementation: ActiveStorage |
-| Product-name        | string     | null: false                   |
-| Product-description | text       | null: false                   |
-| Product-details     | select     | null: false                   |
-| Price               | select     | null: false                   |
+| product_name        | string     | null: false                   |
+| product_description | text       | null: false                   |
+| product_category    | string     | null: false                   |
+| product_status      | string     | null: false                   |
+| shipping_fee burden | string     | null: false                   |
+| shipping_area       | string     | null: false                   |
+| shipping_days       | string     | null: false                   |
+| price               | string     | null: false                   |
 | user                | references | foreign_key: true             |
 
 ### Association
 
-_belongs_to :Users
-_has_many :Comments
-_has_one_attached :Buys
+_belongs_to :users
+_has_many :comments
+_has_one :buys
 
 
-## Buysテーブル
+## purchase_recordsテーブル
 
 |        Column       |    Type    | options     |
 | ------------------- | ---------- | ----------- |
-| Card-information    | string     | null: false |
-| Time-limit          | string     | null: false |
-| Security-cord       | string     | null: false |
+| user                | string     | null: false |
 
 ### Association
 
-belongs_to :Users
-_has_one_attached :Items
-_has_one_attached :Delivery
+belongs_to :users
+_has_one :items
+_has_one :deliveries
 
 
-## Deliveryテーブル
+## deliveriesテーブル
 
 |     Column     |    Type    | options                       |
 | -------------- | ---------- | ----------------------------- |
-| Postal-code    | string     | null: false                   |
-| Prefectures    | select     | null: false                   |
-| Municipalities | string     | null: false                   |
-| Address        | string     | null: false                   |
-| Building       | string     |                               |
-| Phone-number   | string     | null: false                   |
+| postal_code    | string     | null: false                   |
+| prefectures_id | integer    | null: false                   |
+| municipalities | string     | null: false                   |
+| address        | string     | null: false                   |
+| building       | string     |                               |
+| phone_number   | string     | null: false                   |
 
 ### Association
 
-_has_one_attached :Buys
+_has_one :buys
 
 
-## Commentsテーブル
+## commentsテーブル
 
 |  Column  |    Type    | options           |
 | -------- | ---------- | ----------------- | 
@@ -76,5 +80,5 @@ _has_one_attached :Buys
 
 ### Association
 
-belongs_to :Users
-belongs_to :Items
+belongs_to :users
+belongs_to :items
