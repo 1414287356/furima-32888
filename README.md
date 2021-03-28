@@ -22,52 +22,53 @@ _ has_many :comments
 
 ## itemsテーブル
 
-|        Column       |    Type    | options                       |
-| ------------------- | ---------- | ----------------------------- |
-| product_name        | string     | null: false                   |
-| product_description | text       | null: false                   |
-| product_category    | string     | null: false                   |
-| product_status      | string     | null: false                   |
-| shipping_fee burden | string     | null: false                   |
-| shipping_area       | string     | null: false                   |
-| shipping_days       | string     | null: false                   |
-| price               | string     | null: false                   |
-| user                | references | foreign_key: true             |
+|        Column          |    Type    | options                       |
+| ---------------------- | ---------- | ----------------------------- |
+| product_name           | string     | null: false                   |
+| product_description    | text       | null: false                   |
+| product_category_id    | integer    | null: false                   |
+| product_status_id      | integer    | null: false                   |
+| shipping_fee_burden_id | integer    | null: false                   |
+| shipping_area_id       | integer    | null: false                   |
+| shipping_days_id       | integer    | null: false                   |
+| price                  | integer    | null: false                   |
+| user                   | references | foreign_key: true             |
 
 ### Association
 
-_belongs_to :users
+_belongs_to :user
 _has_many :comments
-_has_one :buys
+_has_one :buy
 
 
 ## purchase_recordsテーブル
 
 |        Column       |    Type    | options     |
 | ------------------- | ---------- | ----------- |
-| user                | string     | null: false |
+| user                | references | null: false |
+| item                | references | null: false |
 
 ### Association
 
-belongs_to :users
-_has_one :items
-_has_one :deliveries
+belongs_to :user
+_has_one :item
+_has_one :delivery
 
 
 ## deliveriesテーブル
 
-|     Column     |    Type    | options                       |
-| -------------- | ---------- | ----------------------------- |
-| postal_code    | string     | null: false                   |
-| prefectures_id | integer    | null: false                   |
-| municipalities | string     | null: false                   |
-| address        | string     | null: false                   |
-| building       | string     |                               |
-| phone_number   | string     | null: false                   |
+|      Column      |    Type    | options                       |
+| ---------------- | ---------- | ----------------------------- |
+| postal_code      | string     | null: false                   |
+| shipping_area_id | integer    | null: false                   |
+| municipalities   | string     | null: false                   |
+| address          | string     | null: false                   |
+| building         | string     |                               |
+| phone_number     | string     | null: false                   |
 
 ### Association
 
-_has_one :buys
+_has_one :buy
 
 
 ## commentsテーブル
@@ -80,5 +81,5 @@ _has_one :buys
 
 ### Association
 
-belongs_to :users
-belongs_to :items
+belongs_to :user
+belongs_to :item
