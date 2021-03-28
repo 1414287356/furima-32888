@@ -9,8 +9,8 @@
 | encrypted_password | string | null: false               |
 | first_name         | string | null: false               |
 | last_name          | string | null: false               |
-| first_name(カナ)    | string | null: false               |
-| last_name(カナ)     | string | null: false               |
+| first_name(kana)   | string | null: false               |
+| last_name(kana)    | string | null: false               |
 | birthday           | date   | null: false               |
 
 ### Association
@@ -30,15 +30,15 @@ _ has_many :comments
 | product_status_id      | integer    | null: false                   |
 | shipping_fee_burden_id | integer    | null: false                   |
 | shipping_area_id       | integer    | null: false                   |
-| shipping_days_id       | integer    | null: false                   |
+| shipping_day_id        | integer    | null: false                   |
 | price                  | integer    | null: false                   |
 | user                   | references | foreign_key: true             |
 
 ### Association
 
-_belongs_to :user
-_has_many :comments
-_has_one :buy
+_ belongs_to :user
+_ has_many :comments
+_ has_one :purchase_record
 
 
 ## purchase_recordsテーブル
@@ -50,9 +50,9 @@ _has_one :buy
 
 ### Association
 
-belongs_to :user
-_has_one :item
-_has_one :delivery
+_ belongs_to :user
+_ belongs_to :item
+_ has_one :delivery
 
 
 ## deliveriesテーブル
@@ -68,7 +68,7 @@ _has_one :delivery
 
 ### Association
 
-_has_one :buy
+_ belongs_to :purchase_record
 
 
 ## commentsテーブル
@@ -81,5 +81,5 @@ _has_one :buy
 
 ### Association
 
-belongs_to :user
-belongs_to :item
+_ belongs_to :user
+_ belongs_to :item
