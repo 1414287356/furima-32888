@@ -9,8 +9,8 @@
 | encrypted_password | string | null: false               |
 | first_name         | string | null: false               |
 | last_name          | string | null: false               |
-| first_name(kana)   | string | null: false               |
-| last_name(kana)    | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
 | birthday           | date   | null: false               |
 
 ### Association
@@ -43,10 +43,10 @@ _ has_one :purchase_record
 
 ## purchase_recordsテーブル
 
-|        Column       |    Type    | options     |
-| ------------------- | ---------- | ----------- |
-| user                | references | null: false |
-| item                | references | null: false |
+|        Column       |    Type    | options            |
+| ------------------- | ---------- | ------------------ |
+| user                | references | foreign_key: true  |
+| item                | references | foreign_key: true  |
 
 ### Association
 
@@ -65,6 +65,7 @@ _ has_one :delivery
 | address          | string     | null: false                   |
 | building         | string     |                               |
 | phone_number     | string     | null: false                   |
+| purchase_record  | reference  | foreign_key: true             |
 
 ### Association
 
