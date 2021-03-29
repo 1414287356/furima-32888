@@ -15,7 +15,7 @@
 
 ### Association
 
-_ has_many :buys
+_ has_many :purchase_records
 _ has_many :items
 _ has_many :comments
 
