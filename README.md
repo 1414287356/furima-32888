@@ -65,7 +65,7 @@ _ has_one :delivery
 | address          | string     | null: false                   |
 | building         | string     |                               |
 | phone_number     | string     | null: false                   |
-| purchase_record  | reference  | foreign_key: true             |
+| purchase_record  | references | foreign_key: true             |
 
 ### Association
 
