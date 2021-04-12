@@ -80,21 +80,27 @@ RSpec.describe Item, type: :model do
         end
 
         it '価格が整数のみでしか保存出来ない事' do
-          @item.price =0.03
+          @item.price = 0.03
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price must be an integer")
+          expect(@item.errors.full_messages).to include('Price must be an integer')
         end
 
         it '価格が300円以下では出品投稿も出来ない事' do
           @item.price = 250
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price must be greater than 299")
+          expect(@item.errors.full_messages).to include('Price must be greater than 299')
         end
 
-        it '価格が10000000円以上では出品投稿もできないこと' do
-          @item.price = 100000000
+        it '価格が10000000円以上では出品投稿も出来ない事' do
+          @item.price = 100_000_000
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+          expect(@item.errors.full_messages).to include('Price must be less than 10000000')
+        end
+
+        it '価格が全角文字では登録出来ない事' do
+          @item.price = 'あああ'
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Price is not a number')
         end
       end
     end
