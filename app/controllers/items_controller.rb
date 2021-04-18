@@ -3,6 +3,18 @@ class ItemsController < ApplicationController
     @items = Item.all.order("id DESC")
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def destroy
+
+  end
+
   def new
     @item = Item.new
   end
