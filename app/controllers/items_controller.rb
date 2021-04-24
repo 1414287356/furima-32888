@@ -17,6 +17,12 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    end 
+  end
+
   def update
     if @item.update(item_params) 
       render :show
