@@ -33,7 +33,13 @@ RSpec.describe Form, type: :model do
         it '郵便番号が全角文字では保存出来ない事' do
           @form.postal_code = 'あああああ'
           @form.valid?
-          expect(@form.errors.full_messages).to include("Postal code is invalid. Input half-width numbers.")
+          expect(@form.errors.full_messages).to include("Postal code is invalid. Input hyphen(-)")
+        end
+
+        it '郵便番号がハイフン無しでは登録出来ない事' do
+          @form.postal_code = '1234567'
+          @form.valid?
+          expect(@form.errors.full_messages).to include("Postal code is invalid. Input hyphen(-)")
         end
 
         it '都道府県が何も選択していない状態では保存出来ない事' do

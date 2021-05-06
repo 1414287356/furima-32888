@@ -4,7 +4,7 @@ class Form
 
 
   with_options presence: true do
-    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}$|^\d{3}[-]\d{2}$|^\d{3}$|^\d{5}$|^\d{7}\z/, message: "is invalid. Input half-width numbers." }
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Input hyphen(-)" }
     validates :shipping_area_id
     validates :municipalities, format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: "is invalid. Input full-width characters."}
     validates :address
