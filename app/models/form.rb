@@ -14,6 +14,7 @@ class Form
 
   validates :shipping_area_id, numericality: { other_than: 1 } 
 
+
   def save
     purchase_record = PurchaseRecord.create(user_id: user_id, item_id: item_id)
     Delivery.create(postal_code: postal_code, shipping_area_id: shipping_area_id, municipalities: municipalities, address: address, building: building, phone_number: phone_number, purchase_record_id: purchase_record.id )

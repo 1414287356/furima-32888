@@ -16,6 +16,7 @@ class Item < ApplicationRecord
                     format: { with: /\A[0-9]+\z/ }
 
   belongs_to :user
+  has_one :purchase_record
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
