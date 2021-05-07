@@ -1,14 +1,10 @@
 class PurchaseRecordsController < ApplicationController
-before_action :set_item, only: [:create, :index]
-before_action :authenticate_user!
-before_action :move_to_root_path, only: :index
-before_action :move_to_root_path
+  before_action :set_item
+  before_action :authenticate_user!
+  before_action :move_to_root_path_1, only: :index
+  before_action :move_to_root_path_2
 
   def index
-    @form = Form.new
-  end
-
-  def new
     @form = Form.new
   end
 
@@ -30,7 +26,7 @@ before_action :move_to_root_path
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item[:price],
       card: form_params[:token],
@@ -39,18 +35,16 @@ before_action :move_to_root_path
   end
 
   def form_params
-    params.require(:form).permit(:postal_code, :shipping_area_id, :municipalities, :address, :building, :phone_number, :purchase_record).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:form).permit(:postal_code, :shipping_area_id, :municipalities, :address, :building, :phone_number, :purchase_record).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
-  def move_to_root_path
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
+  def move_to_root_path_1
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
-  def move_to_root_path
-    if @item.purchase_record != nil
-      redirect_to root_path
-    end
+  def move_to_root_path_2
+    redirect_to root_path unless @item.purchase_record.nil?
   end
 end
