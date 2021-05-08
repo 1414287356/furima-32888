@@ -1,7 +1,7 @@
 class PurchaseRecordsController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!
-  before_action :move_to_root_path_1, only: :index
+  before_action :move_to_root_path_1, only: [:index, :create]
   before_action :move_to_root_path_2
 
   def index

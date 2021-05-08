@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_072044) do
     t.integer "shipping_area_id", null: false
     t.string "municipalities", null: false
     t.string "address", null: false
-    t.string "building", null: false
+    t.string "building"
     t.string "phone_number", null: false
     t.bigint "purchase_record_id"
     t.index ["purchase_record_id"], name: "index_deliveries_on_purchase_record_id"

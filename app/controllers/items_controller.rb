@@ -15,6 +15,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    unless @item.purchase_record.nil?
+      redirect_to root_path
+    end
   end
 
   def destroy
