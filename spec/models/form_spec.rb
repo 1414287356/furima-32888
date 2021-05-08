@@ -98,6 +98,24 @@ RSpec.describe Form, type: :model do
           @form.valid?
           expect(@form.errors.full_messages).to include('Phone number is invalid. Input half-width 10-11numbers.')
         end
+
+        it '電話番号が数字のみで無いと保存出来ない事' do
+          @form.phone_number = 'o9o1234789o'
+          @form.valid?
+          expect(@form.errors.full_messages).to include('Phone number is invalid. Input half-width 10-11numbers.')
+        end
+
+        it '電話番号にハイフン(-)が入っていても保存出来ない事' do
+          @form.phone_number = '090-1234-5689'
+          @form.valid?
+          expect(@form.errors.full_messages).to include('Phone number is invalid. Input half-width 10-11numbers.')
+        end
+
+        it '電話番号が全角数字だと保存出来ない事' do
+          @form.phone_number = '０９０１２３４５６７８'
+          @form.valid?
+          expect(@form.errors.full_messages).to include('Phone number is invalid. Input half-width 10-11numbers.')
+        end
       end
     end
   end
