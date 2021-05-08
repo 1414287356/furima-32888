@@ -16,7 +16,8 @@ RSpec.describe Item, type: :model do
       context '異常系' do
         it '出品画像が空の状態では保存出来ない事' do
           @item.image = nil
-          expect(@item).to be_valid
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Image can't be blank")
         end
 
         it '商品名が空の状態では保存出来ない事' do

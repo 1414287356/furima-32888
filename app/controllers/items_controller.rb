@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.purchase_record.nil?
+    unless @item.purchase_record.nil?
       redirect_to root_path
     end
   end
