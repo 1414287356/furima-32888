@@ -9,7 +9,7 @@ FactoryBot.define do
     shipping_day_id { 2 }
     price { Faker::Number.number(digits: 5) }
 
-    after(:build) do | item |
+    after(:build) do |item|
       item.image.attach(io: File.open('public/images/animal_stand_neko.png'), filename: 'animal_stand_neko.png')
     end
 
